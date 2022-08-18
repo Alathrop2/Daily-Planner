@@ -30,3 +30,5 @@ Jquery
 https://alathrop2.github.io/Daily-Planner/
 
 # Screenshot
+
+![Imgur](https://i.imgur.com/YeLmUbK.png)

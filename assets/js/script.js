@@ -27,23 +27,17 @@ $(window).ready(function () {
 
     console.log(currentHour);
     console.log(timeNum);
+    // ! color code based on past, present, future
+    if (timeNum < currentHour) {
+      textBox[i].classList.add('bg-danger');
+    } else if (timeNum === currentHour) {
+      textBox[i].classList.add('bg-warning');
+    }
+    if (timeNum > currentHour) {
+      textBox[i].classList.add('bg-success');
+    }
   }
 });
-function colorChange() {
-  // ! color code based on past, present, future
-  if (timeNum < currentHour) {
-    textBox[i].classList.add('past');
-  } else if (timeNum === currentHour) {
-    textBox[i].classList.add('present');
-  }
-  if (timeNum > currentHour) {
-    textBox[i].classList
-      .remove('past')
-      .classList.remove('present')
-      .classList.add('future');
-  }
-}
-colorChange();
 
 // GIVEN I am using a daily planner to create a schedule
 //  WHEN I open the planner
