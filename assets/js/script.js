@@ -1,6 +1,6 @@
 var today = moment();
 var currentTime = moment().format('MMMM Do YYYY, h:mm:ss a');
-var currentHour = moment().format('h ');
+var currentHour = moment().format('ha');
 var textBox = document.querySelectorAll('.bg-secondary');
 var savedInfo = localStorage.getItem('Saved Task');
 var saveButton = document.querySelectorAll('.saveBtn');
@@ -22,20 +22,28 @@ $(window).ready(function () {
     // get local storage
 
     var getLocal = localStorage.getItem('saved Task' + i);
-    var timeNum = parseInt(time[i].innerHTML);
+    var timeNum = time[i].innerHTML;
     $(textBox[i]).text(getLocal);
 
     console.log(currentHour);
     console.log(timeNum);
-    // ! color code based on past, present, future
-    if (timeNum < parseInt(currentHour)) {
-      textBox[i].classList.add('bg-danger');
-    } else if (timeNum === parseInt(currentHour)) {
-      textBox[i].classList.add('bg-warning');
-    } else if (timeNum > parseInt(currentHour));
-    textBox[i].classList.add('bg-success');
   }
 });
+function colorChange() {
+  // ! color code based on past, present, future
+  if (timeNum < currentHour) {
+    textBox[i].classList.add('past');
+  } else if (timeNum === currentHour) {
+    textBox[i].classList.add('present');
+  }
+  if (timeNum > currentHour) {
+    textBox[i].classList
+      .remove('past')
+      .classList.remove('present')
+      .classList.add('future');
+  }
+}
+colorChange();
 
 // GIVEN I am using a daily planner to create a schedule
 //  WHEN I open the planner
