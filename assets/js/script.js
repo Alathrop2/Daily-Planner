@@ -1,20 +1,18 @@
 var today = moment();
 var currentTime = moment().format('MMMM Do YYYY, h:mm:ss a');
+var currentHour = moment().format('h ');
 var textBox = document.querySelectorAll('.bg-secondary');
 var savedInfo = localStorage.getItem('Saved Task');
 var saveButton = document.querySelectorAll('.saveBtn');
 var time = document.querySelectorAll('.time');
 // code for adding the current day to the top of the screen
 var currentDay = $('#currentDay').text(today.format('MMM Do, YYYY'));
-console.log(textBox);
-console.log(saveButton);
 
 // event listener array to set local storage
 for (let i = 0; i < saveButton.length; i++) {
   // setting local storage
   saveButton[i].addEventListener('click', function () {
     localStorage.setItem('saved Task' + i, textBox[i].value);
-    console.log(textBox[i].value);
   });
 }
 
@@ -22,21 +20,22 @@ for (let i = 0; i < saveButton.length; i++) {
 $(window).ready(function () {
   for (let i = 0; i < saveButton.length; i++) {
     // get local storage
-    console.log(i);
+
     var getLocal = localStorage.getItem('saved Task' + i);
-    console.log(getLocal);
+    var timeNum = parseInt(time[i].innerHTML);
     $(textBox[i]).text(getLocal);
-    console.log(time[i].innerHTML);
+
+    console.log(currentHour);
+    console.log(timeNum);
     // ! color code based on past, present, future
-    if (time[i].innerHTML < currentTime) {
+    if (timeNum < parseInt(currentHour)) {
       textBox[i].classList.add('bg-danger');
-    } else if ((time[i].innerHTML = currentTime)) {
+    } else if (timeNum === parseInt(currentHour)) {
       textBox[i].classList.add('bg-warning');
-    }
+    } else if (timeNum > parseInt(currentHour));
+    textBox[i].classList.add('bg-success');
   }
 });
-
-console.log(currentTime);
 
 // GIVEN I am using a daily planner to create a schedule
 //  WHEN I open the planner
